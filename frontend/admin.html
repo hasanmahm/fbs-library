@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Admin - FBS Library</title>
+    <link rel="stylesheet" href="css/admin-style.css" />
+
+
+   
+  </head>
+  <body>
+    <header>
+      <h1>📚 FBS Library Dashboard</h1>
+      <nav>
+         <a href="admin.html">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="borrower.html">Borrowers</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="dashboard">
+        <h2>Overview</h2>
+        <div class="stats-grid">
+          <div class="card">
+            <h3>Total Books Category</h3>
+            <span id="totalBooksCategory">-</span>
+          </div>
+          <div class="card">
+            <h3>Total Books </h3>
+            <span id="totalBooks">-</span>
+          </div>
+          <div class="card">
+            <h3>Total Borrowers</h3>
+            <span id="totalBorrowers">-</span>
+          </div>
+          <div class="card">
+            <h3>Books Remaining</h3>
+            <span id="booksRemaining">-</span>
+          </div>
+          <div class="card">
+            <h3>Borrowed (last 30 days)</h3>
+            <span id="borrow30">-</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 FBS Library Management System</p>
+    </footer>
+    <script>
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("adminLoggedIn");
+        window.location.href = "index.html";
+      }); // simple frontend protection
+      if (localStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "index.html"; // redirect to login
+      }
+    </script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

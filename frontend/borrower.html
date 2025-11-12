@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Borrowers - FBS Library</title>
+    <link rel="stylesheet" href="css/admin-style.css" />
+    <link rel="stylesheet" href="css/borrowers.css" />
+  </head>
+  <body>
+    <header>
+      <h1>👥 Borrowers Management</h1>
+      <nav>
+        <a href="admin.html">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="borrower.html">Borrowers</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="page-header">
+        <h2>Borrower Overview</h2>
+        <p>Track, add, and manage all borrower records with ease.</p>
+      </section>
+
+      <!-- 🔽 Add Borrower Toggle -->
+      <section id="addBorrowerSection">
+        <button id="toggleAdd" class="toggle-btn">➕ Add Borrower</button>
+
+        <form id="borrowerForm" class="hidden">
+          <h3>Add a New Borrower</h3>
+          <div class="form-grid">
+            <input placeholder="Name" id="name" required />
+            <input placeholder="Email" id="email" required />
+            <input placeholder="Phone (optional)" id="phone" />
+            <select id="designation">
+              <option>Member</option>
+              <option>Associate</option>
+              <option>Worker</option>
+              <option>Supporter</option>
+            </select>
+            <select id="bookSelect"></select>
+            <label>Return Date</label>
+            <input type="date" id="returnDate" required />
+          </div>
+          <button type="submit" class="primary-btn">Add Borrower</button>
+          <p id="borrowMsg"></p>
+        </form>
+      </section>
+
+      <!-- 🔍 Search Section -->
+      <section id="searchBorrower">
+        <h3>Search Borrowers</h3>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, email, or book..."
+        />
+        <button id="searchBtn" class="primary-btn small">Search</button>
+        <button id="resetBtn" class="secondary-btn small">Reset</button>
+        <button class="secondary-btn small" id="pr">Print</button>
+      </section>
+
+      <!-- 📋 Borrower List -->
+      <section id="borrowerList">
+        <h3>All Borrowers</h3>
+        <table id="tableBorrowers">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Book</th>
+              <th>Borrowed</th>
+              <th>Return</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 FBS Library Management System</p>
+    </footer>
+
+    <script src="js/borrowers.js"></script>
+    <script>
+      // Toggle Add Borrower Form
+      const toggleBtn = document.getElementById("toggleAdd");
+      const form = document.getElementById("borrowerForm");
+      toggleBtn.addEventListener("click", () => {
+        form.classList.toggle("hidden");
+        toggleBtn.textContent = form.classList.contains("hidden")
+          ? "➕ Add Borrower"
+          : "✖️ Close Add Borrower";
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("adminLoggedIn");
+        window.location.href = "index.html";
+      }); // simple frontend protection
+      if (localStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "index.html"; // redirect to login
+      }
+
+      const printf = document.getElementById("pr");
+      printf.addEventListener("click", function () {
+        window.print();
+      });
+    </script>
+  </body>
+</html>

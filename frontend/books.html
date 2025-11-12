@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Books - FBS Library</title>
+    <link rel="stylesheet" href="css/admin-style.css" />
+    <link rel="stylesheet" href="css/books.css" />
+  </head>
+  <body>
+    <header>
+      <h1>📚 Books Management</h1>
+      <nav>
+        <a href="admin.html">Dashboard</a>
+        <a href="books.html">Books</a>
+        <a href="borrower.html">Borrowers</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="page-header">
+        <h2>Books Overview</h2>
+        <p>Manage, add, and search through all library books efficiently.</p>
+      </section>
+
+      <!-- 🔽 Toggle Add Section -->
+      <section id="addBookSection">
+        <button id="toggleAdd" class="toggle-btn">➕ Add Book</button>
+
+        <form id="bookForm" class="hidden">
+          <h3>Add a New Book</h3>
+          <div class="form-grid">
+            <input id="bName" placeholder="Book Name" required />
+            <input id="bAuthor" placeholder="Author" />
+            <input id="bPrice" placeholder="Price" type="number" />
+            <input
+              id="bQuantity"
+              placeholder="Quantity"
+              type="number"
+              value="1"
+            />
+            <select id="bType">
+              <option>Al-Hadith</option>
+              <option>Al Quran</option>
+              <option>Islamic</option>
+              <option>Career</option>
+              <option>Magazine</option>
+              <option>General</option>
+            </select>
+          </div>
+          <button type="submit" class="primary-btn">Add Book</button>
+          <p id="bookMsg"></p>
+        </form>
+      </section>
+
+      <!-- 🔍 Search Section -->
+      <section id="searchBook">
+        <h3>Search Books</h3>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, author, or type..."
+        />
+        <button id="searchBtn" class="primary-btn small">Search</button>
+        <button id="resetBtn" class="secondary-btn small">Reset</button>
+        <button class="secondary-btn small" id="pr">Print</button>
+      </section>
+
+      <!-- 📖 Books List -->
+      <section id="bookList">
+        <h3>All Books</h3>
+        <table id="tableBooks">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Author</th>
+              <th>Qty</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 FBS Library Management System</p>
+    </footer>
+
+    <script src="js/books.js"></script>
+    <script>
+      // Toggle Add Form
+      const toggleBtn = document.getElementById("toggleAdd");
+      const form = document.getElementById("bookForm");
+      toggleBtn.addEventListener("click", () => {
+        form.classList.toggle("hidden");
+        toggleBtn.textContent = form.classList.contains("hidden")
+          ? "➕ Add Book"
+          : "✖️ Close Add Book";
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("adminLoggedIn");
+        window.location.href = "index.html";
+      });
+      //  simple frontend protection
+      if (localStorage.getItem("adminLoggedIn") !== "true") {
+        window.location.href = "index.html"; // redirect to login
+      }
+
+      const printf = document.getElementById("pr");
+      printf.addEventListener("click", function () {
+        window.print("'", "","width: 500px");
+      });
+    </script>
+  </body>
+</html>
