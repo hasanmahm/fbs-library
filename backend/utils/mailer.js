@@ -31,3 +31,5 @@ export async function sendMail(to, subject, html) {
     console.error("❌ Email send failed:", err);
   }
 }
+
+export default transporter;
